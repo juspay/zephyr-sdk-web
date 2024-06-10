@@ -1,5 +1,5 @@
 {
-  "name": "zephyr-sdk-web",
+  "name": "@juspay/zephyr-sdk-web",
   "version": "0.0.1",
   "type": "module",
   "description": "SDK for integrating Breeze 1CCO into your Web Application",
@@ -34,11 +34,14 @@
   },
   "scripts": {
     "dev": "npx bun --watch src/index.ts",
-    "build": "tsc --build",
+    "clean:output": "rm -rf dist",
+    "build": "npm run clean:output && rollup --config rollup.config.js",
     "setup": "sh scripts/setup.sh",
     "format:all": "npx prettier --write .",
+    "format:generated": "prettier --write ./src/generated/*",
     "lint:all": "eslint . --ext .ts",
-    "generate:doc": "npx typedoc src/index.ts"
+    "generate:doc": "npx typedoc src/index.ts",
+    "generate:types": "npx type-crafter generate typescript-with-decoders ./specs/types.spec.yaml ./src/generated/types SingleFile SingleFile && pnpm run format:generated"
   },
   "author": "",
   "license": "ISC",
@@ -46,6 +49,10 @@
     "@commitlint/cli": "^18.4.2",
     "@commitlint/config-conventional": "^18.4.2",
     "@digitalroute/cz-conventional-changelog-for-jira": "^8.0.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@rollup/plugin-terser": "^0.4.4",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "bun": "^1.1.7",
@@ -58,7 +65,9 @@
     "husky": "^8.0.3",
     "prettier": "^3.1.0",
     "publint": "^0.2.5",
+    "rollup": "^4.17.2",
     "tslib": "^2.6.2",
+    "type-crafter": "^0.8.2",
     "type-decoder": "^2.0.1",
     "typedoc": "^0.25.7",
     "typescript": "^5.2.2"

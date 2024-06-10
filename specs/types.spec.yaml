@@ -1,0 +1,141 @@
+info:
+  version: 0.0.1
+  title: Zephyr SDK Web Types spec
+
+types:
+  ZephyrInitiatePayload:
+    type: object
+    required:
+      - environment
+      - shopUrl
+      - merchantId
+      - shopPlatform
+    properties:
+      merchantId:
+        type: string
+      shopUrl:
+        type: string
+      shopPlatform:
+        type: string
+        enum:
+          - shopify
+          - magento
+          - bigcommerce
+          - woocommerce
+          - custom
+      environment:
+        type: string
+        enum:
+          - production
+          - beta
+
+  ZephyrProcessPayload:
+    type: object
+    required:
+      - cart
+    properties:
+      action:
+        type: string
+        enum:
+          - startCheckout
+      cart:
+        $ref: '#/types/ZephyrCart'
+      utmParams:
+        $ref: '#/types/ZephyrUTMParams'
+
+  ZephyrCart:
+    type: object
+    required:
+      - initialPrice
+      - totalPrice
+      - totalDiscount
+      - itemCount
+      - items
+      - currency
+    properties:
+      initialPrice:
+        type: number
+      totalPrice:
+        type: number
+      totalDiscount:
+        type: number
+      weight:
+        type: number
+      itemCount:
+        type: number
+      currency:
+        $ref: '#/types/ZephyrCurrency'
+      items:
+        type: array
+        items:
+          $ref: '#/types/ZephyrCartItem'
+
+  ZephyrCartItem:
+    type: object
+    required:
+      - id
+      - title
+      - quantity
+      - discount
+      - initialPrice
+      - finalPrice
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      variantTitle:
+        type: string
+      variantId:
+        type: string
+      image:
+        type: string
+      weight:
+        type: number
+      quantity:
+        type: number
+      discount:
+        type: number
+      initialPrice:
+        type: number
+      finalPrice:
+        type: number
+
+  ZephyrCurrency:
+    type: string
+    description: Currency schema
+    enum:
+      - INR
+      - USD
+      - GBP
+      - AUD
+      - CAD
+      - SGD
+      - AED
+      - PKR
+      - BDT
+
+  ZephyrUTMParams:
+    type: object
+    properties:
+      utmSource:
+        type: string
+      utmMedium:
+        type: string
+      utmCampaign:
+        type: string
+      utmTerm:
+        type: string
+      utmContent:
+        type: string
+
+  ZephyrEvent:
+    type: object
+    required:
+      - eventName
+    properties:
+      eventName:
+        type: string
+      eventData:
+        type: object
+        additionalProperties: true
