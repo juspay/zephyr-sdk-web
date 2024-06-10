@@ -35,6 +35,7 @@ class ZephyrSDK {
       script.async = true;
       script.setAttribute('data-merchantid', payload.merchantId);
       script.setAttribute('data-shopurl', payload.shopUrl);
+      script.setAttribute('data-environment', payload.environment ?? 'production');
       script.onload = () => {
         try {
           const hiddenElement = document.createElement('breeze-button');

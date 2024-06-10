@@ -23,7 +23,7 @@ export type ZephyrInitiatePayload = {
    * @type { EnvironmentEnum }
    * @memberof ZephyrInitiatePayload
    */
-  environment: EnvironmentEnum;
+  environment: EnvironmentEnum | null;
 };
 
 export function decodeZephyrInitiatePayload(rawInput: unknown): ZephyrInitiatePayload | null {
@@ -33,12 +33,7 @@ export function decodeZephyrInitiatePayload(rawInput: unknown): ZephyrInitiatePa
     const decodedShopPlatform = decodeShopPlatformEnum(rawInput['shopPlatform']);
     const decodedEnvironment = decodeEnvironmentEnum(rawInput['environment']);
 
-    if (
-      decodedMerchantId === null ||
-      decodedShopUrl === null ||
-      decodedShopPlatform === null ||
-      decodedEnvironment === null
-    ) {
+    if (decodedMerchantId === null || decodedShopUrl === null || decodedShopPlatform === null) {
       return null;
     }
 

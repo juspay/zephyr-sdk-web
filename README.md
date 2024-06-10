@@ -26,7 +26,7 @@ To initiate the Zephyr SDK Web, you need to call the `initiate` method of the SD
 | -------------- | ------ | --------- | ---------------------------------------------------------------------------------------------------------- |
 | `merchantId`   | String | Yes       | The merchant ID provided by Juspay.                                                                        |
 | `shopUrl`      | String | Yes       | The URL of the shop where the SDK will be used.                                                            |
-| `environment`  | String | Yes       | The environment in which the SDK should run. Possible values are `beta` and `production`.                  |
+| `environment`  | String | No        | The environment in which the SDK should run. Possible values are `beta` and `production`.                  |
 | `shopPlatform` | String | Yes       | The platform on which the shop is built. Possible values are `shopify`, `magento`, `woocommerce`, `custom` |
 
 ```javascript

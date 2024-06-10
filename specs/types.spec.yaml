@@ -6,7 +6,6 @@ types:
   ZephyrInitiatePayload:
     type: object
     required:
-      - environment
       - shopUrl
       - merchantId
       - shopPlatform
