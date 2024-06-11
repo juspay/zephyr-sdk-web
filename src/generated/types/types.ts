@@ -89,19 +89,25 @@ export type ZephyrProcessPayload = {
    * @type { ZephyrCart }
    * @memberof ZephyrProcessPayload
    */
-  cart: ZephyrCart;
+  cart: ZephyrCart | string;
   /**
    * @type { ZephyrUTMParams }
    * @memberof ZephyrProcessPayload
    */
   utmParams: ZephyrUTMParams | null;
+  /**
+   * @type { string }
+   * @memberof ZephyrProcessPayload
+   */
+  signature: string | null;
 };
 
 export function decodeZephyrProcessPayload(rawInput: unknown): ZephyrProcessPayload | null {
   if (isJSON(rawInput)) {
     const decodedAction = decodeActionEnum(rawInput['action']);
-    const decodedCart = decodeZephyrCart(rawInput['cart']);
+    const decodedCart = decodeZephyrCart(rawInput['cart']) ?? decodeString(rawInput['cart']);
     const decodedUtmParams = decodeZephyrUTMParams(rawInput['utmParams']);
+    const decodedSignature = decodeString(rawInput['signature']);
 
     if (decodedCart === null) {
       return null;
@@ -110,7 +116,8 @@ export function decodeZephyrProcessPayload(rawInput: unknown): ZephyrProcessPayl
     return {
       action: decodedAction,
       cart: decodedCart,
-      utmParams: decodedUtmParams
+      utmParams: decodedUtmParams,
+      signature: decodedSignature
     };
   }
   return null;

@@ -72,7 +72,7 @@ class ZephyrSDK {
     this.processPayload = payload;
 
     if (typeof window.breeze?.startCheckout === 'function') {
-      window.breeze.startCheckout({ ...payload.cart, shopUrl: this.initiatePayload.shopUrl });
+      window.breeze.startCheckout(payload);
     } else {
       console.error('Breeze SDK not loaded');
     }

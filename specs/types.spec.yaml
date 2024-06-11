@@ -38,9 +38,13 @@ types:
         enum:
           - startCheckout
       cart:
-        $ref: '#/types/ZephyrCart'
+        oneOf:
+          - $ref: '#/types/ZephyrCart'
+          - type: string
       utmParams:
         $ref: '#/types/ZephyrUTMParams'
+      signature:
+        type: string
 
   ZephyrCart:
     type: object
