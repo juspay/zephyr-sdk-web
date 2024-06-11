@@ -51,11 +51,12 @@ To process your request through Zephyr SDK, you need to call the `process` metho
 
 #### Process Payload
 
-| Parameter   | Type       | Mandatory | Description                                                                |
-| ----------- | ---------- | --------- | -------------------------------------------------------------------------- |
-| `action`    | String     | Yes       | The action to be performed by the SDK. Possible values are `startCheckout` |
-| `cart`      | ZephyrCart | Yes       | The cart object which contains the cart details.                           |
-| `utmParams` | Object     | No        | UTP Parameters associated with the user journey                            |
+| Parameter   | Type                 | Mandatory | Description                                                                                                |
+| ----------- | -------------------- | --------- | ---------------------------------------------------------------------------------------------------------- |
+| `action`    | String               | Yes       | The action to be performed by the SDK. Possible values are `startCheckout`                                 |
+| `cart`      | ZephyrCart or String | Yes       | The cart object which contains the cart details or Stringified Cart when using signature based integration |
+| `utmParams` | Object               | No        | UTP Parameters associated with the user journey                                                            |
+| `signature` | String               | No        | RSA Signed signature for Stringified ZephyrCart JSON                                                       |
 
 #### ZephyrCart
 
