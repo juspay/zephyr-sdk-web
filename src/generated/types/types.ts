@@ -1,32 +1,32 @@
 import { isJSON, decodeString, decodeNumber, decodeArray } from 'type-decoder';
 
 /**
- * @type { ZephyrInitiatePayload }
+ * @type { BlazeInitiatePayload }
  */
-export type ZephyrInitiatePayload = {
+export type BlazeInitiatePayload = {
   /**
    * @type { string }
-   * @memberof ZephyrInitiatePayload
+   * @memberof BlazeInitiatePayload
    */
   merchantId: string;
   /**
    * @type { string }
-   * @memberof ZephyrInitiatePayload
+   * @memberof BlazeInitiatePayload
    */
   shopUrl: string;
   /**
    * @type { ShopPlatformEnum }
-   * @memberof ZephyrInitiatePayload
+   * @memberof BlazeInitiatePayload
    */
   shopPlatform: ShopPlatformEnum;
   /**
    * @type { EnvironmentEnum }
-   * @memberof ZephyrInitiatePayload
+   * @memberof BlazeInitiatePayload
    */
   environment: EnvironmentEnum | null;
 };
 
-export function decodeZephyrInitiatePayload(rawInput: unknown): ZephyrInitiatePayload | null {
+export function decodeBlazeInitiatePayload(rawInput: unknown): BlazeInitiatePayload | null {
   if (isJSON(rawInput)) {
     const decodedMerchantId = decodeString(rawInput['merchantId']);
     const decodedShopUrl = decodeString(rawInput['shopUrl']);
@@ -77,36 +77,36 @@ export function decodeEnvironmentEnum(rawInput: unknown): EnvironmentEnum | null
 }
 
 /**
- * @type { ZephyrProcessPayload }
+ * @type { BlazeProcessPayload }
  */
-export type ZephyrProcessPayload = {
+export type BlazeProcessPayload = {
   /**
    * @type { ActionEnum }
-   * @memberof ZephyrProcessPayload
+   * @memberof BlazeProcessPayload
    */
   action: ActionEnum | null;
   /**
-   * @type { ZephyrCart }
-   * @memberof ZephyrProcessPayload
+   * @type { BlazeProcessPayloadCart }
+   * @memberof BlazeProcessPayload
    */
-  cart: ZephyrCart | string;
+  cart: BlazeProcessPayloadCart;
   /**
-   * @type { ZephyrUTMParams }
-   * @memberof ZephyrProcessPayload
+   * @type { BlazeUTMParams }
+   * @memberof BlazeProcessPayload
    */
-  utmParams: ZephyrUTMParams | null;
+  utmParams: BlazeUTMParams | null;
   /**
    * @type { string }
-   * @memberof ZephyrProcessPayload
+   * @memberof BlazeProcessPayload
    */
   signature: string | null;
 };
 
-export function decodeZephyrProcessPayload(rawInput: unknown): ZephyrProcessPayload | null {
+export function decodeBlazeProcessPayload(rawInput: unknown): BlazeProcessPayload | null {
   if (isJSON(rawInput)) {
     const decodedAction = decodeActionEnum(rawInput['action']);
-    const decodedCart = decodeZephyrCart(rawInput['cart']) ?? decodeString(rawInput['cart']);
-    const decodedUtmParams = decodeZephyrUTMParams(rawInput['utmParams']);
+    const decodedCart = decodeBlazeProcessPayloadCart(rawInput['cart']);
+    const decodedUtmParams = decodeBlazeUTMParams(rawInput['utmParams']);
     const decodedSignature = decodeString(rawInput['signature']);
 
     if (decodedCart === null) {
@@ -134,57 +134,82 @@ export function decodeActionEnum(rawInput: unknown): ActionEnum | null {
   }
   return null;
 }
+export type BlazeProcessPayloadCart = CBlazeProcessPayloadCartBlazeCart | string;
+
+export function decodeBlazeProcessPayloadCart(rawInput: unknown): BlazeProcessPayloadCart | null {
+  const result: BlazeProcessPayloadCart | null =
+    decodeCBlazeProcessPayloadCartBlazeCart(rawInput) ?? decodeString(rawInput);
+
+  return result;
+}
+
+export class CBlazeProcessPayloadCartBlazeCart {
+  data: BlazeCart;
+  constructor(data: BlazeCart) {
+    this.data = data;
+  }
+}
+
+export function decodeCBlazeProcessPayloadCartBlazeCart(
+  rawInput: unknown
+): CBlazeProcessPayloadCartBlazeCart | null {
+  const result = decodeBlazeCart(rawInput);
+  if (result === null) {
+    return null;
+  }
+  return new CBlazeProcessPayloadCartBlazeCart(result);
+}
 
 /**
- * @type { ZephyrCart }
+ * @type { BlazeCart }
  */
-export type ZephyrCart = {
+export type BlazeCart = {
   /**
    * @type { number }
-   * @memberof ZephyrCart
+   * @memberof BlazeCart
    */
   initialPrice: number;
   /**
    * @type { number }
-   * @memberof ZephyrCart
+   * @memberof BlazeCart
    */
   totalPrice: number;
   /**
    * @type { number }
-   * @memberof ZephyrCart
+   * @memberof BlazeCart
    */
   totalDiscount: number;
   /**
    * @type { number }
-   * @memberof ZephyrCart
+   * @memberof BlazeCart
    */
   weight: number | null;
   /**
    * @type { number }
-   * @memberof ZephyrCart
+   * @memberof BlazeCart
    */
   itemCount: number;
   /**
-   * @type { ZephyrCurrency }
-   * @memberof ZephyrCart
+   * @type { BlazeCurrency }
+   * @memberof BlazeCart
    */
-  currency: ZephyrCurrency;
+  currency: BlazeCurrency;
   /**
-   * @type { ZephyrCartItem[] }
-   * @memberof ZephyrCart
+   * @type { BlazeCartItem[] }
+   * @memberof BlazeCart
    */
-  items: ZephyrCartItem[];
+  items: BlazeCartItem[];
 };
 
-export function decodeZephyrCart(rawInput: unknown): ZephyrCart | null {
+export function decodeBlazeCart(rawInput: unknown): BlazeCart | null {
   if (isJSON(rawInput)) {
     const decodedInitialPrice = decodeNumber(rawInput['initialPrice']);
     const decodedTotalPrice = decodeNumber(rawInput['totalPrice']);
     const decodedTotalDiscount = decodeNumber(rawInput['totalDiscount']);
     const decodedWeight = decodeNumber(rawInput['weight']);
     const decodedItemCount = decodeNumber(rawInput['itemCount']);
-    const decodedCurrency = decodeZephyrCurrency(rawInput['currency']);
-    const decodedItems = decodeArray(rawInput['items'], decodeZephyrCartItem);
+    const decodedCurrency = decodeBlazeCurrency(rawInput['currency']);
+    const decodedItems = decodeArray(rawInput['items'], decodeBlazeCartItem);
 
     if (
       decodedInitialPrice === null ||
@@ -211,62 +236,62 @@ export function decodeZephyrCart(rawInput: unknown): ZephyrCart | null {
 }
 
 /**
- * @type { ZephyrCartItem }
+ * @type { BlazeCartItem }
  */
-export type ZephyrCartItem = {
+export type BlazeCartItem = {
   /**
    * @type { string }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   id: string;
   /**
    * @type { string }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   title: string;
   /**
    * @type { string }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   variantTitle: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   variantId: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   image: string | null;
   /**
    * @type { number }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   weight: number | null;
   /**
    * @type { number }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   quantity: number;
   /**
    * @type { number }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   discount: number;
   /**
    * @type { number }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   initialPrice: number;
   /**
    * @type { number }
-   * @memberof ZephyrCartItem
+   * @memberof BlazeCartItem
    */
   finalPrice: number;
 };
 
-export function decodeZephyrCartItem(rawInput: unknown): ZephyrCartItem | null {
+export function decodeBlazeCartItem(rawInput: unknown): BlazeCartItem | null {
   if (isJSON(rawInput)) {
     const decodedId = decodeString(rawInput['id']);
     const decodedTitle = decodeString(rawInput['title']);
@@ -307,12 +332,12 @@ export function decodeZephyrCartItem(rawInput: unknown): ZephyrCartItem | null {
 }
 
 /**
- * @type { ZephyrCurrency }
+ * @type { BlazeCurrency }
  * @description Currency schema
  */
-export type ZephyrCurrency = 'INR' | 'USD' | 'GBP' | 'AUD' | 'CAD' | 'SGD' | 'AED' | 'PKR' | 'BDT';
+export type BlazeCurrency = 'INR' | 'USD' | 'GBP' | 'AUD' | 'CAD' | 'SGD' | 'AED' | 'PKR' | 'BDT';
 
-export function decodeZephyrCurrency(rawInput: unknown): ZephyrCurrency | null {
+export function decodeBlazeCurrency(rawInput: unknown): BlazeCurrency | null {
   switch (rawInput) {
     case 'INR':
     case 'USD':
@@ -329,37 +354,37 @@ export function decodeZephyrCurrency(rawInput: unknown): ZephyrCurrency | null {
 }
 
 /**
- * @type { ZephyrUTMParams }
+ * @type { BlazeUTMParams }
  */
-export type ZephyrUTMParams = {
+export type BlazeUTMParams = {
   /**
    * @type { string }
-   * @memberof ZephyrUTMParams
+   * @memberof BlazeUTMParams
    */
   utmSource: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrUTMParams
+   * @memberof BlazeUTMParams
    */
   utmMedium: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrUTMParams
+   * @memberof BlazeUTMParams
    */
   utmCampaign: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrUTMParams
+   * @memberof BlazeUTMParams
    */
   utmTerm: string | null;
   /**
    * @type { string }
-   * @memberof ZephyrUTMParams
+   * @memberof BlazeUTMParams
    */
   utmContent: string | null;
 };
 
-export function decodeZephyrUTMParams(rawInput: unknown): ZephyrUTMParams | null {
+export function decodeBlazeUTMParams(rawInput: unknown): BlazeUTMParams | null {
   if (isJSON(rawInput)) {
     const decodedUtmSource = decodeString(rawInput['utmSource']);
     const decodedUtmMedium = decodeString(rawInput['utmMedium']);
@@ -379,25 +404,25 @@ export function decodeZephyrUTMParams(rawInput: unknown): ZephyrUTMParams | null
 }
 
 /**
- * @type { ZephyrEvent }
+ * @type { BlazeEvent }
  */
-export type ZephyrEvent = {
+export type BlazeEvent = {
   /**
    * @type { string }
-   * @memberof ZephyrEvent
+   * @memberof BlazeEvent
    */
   eventName: string;
   /**
-   * @type { ZephyrEventEventData }
-   * @memberof ZephyrEvent
+   * @type { BlazeEventEventData }
+   * @memberof BlazeEvent
    */
-  eventData: ZephyrEventEventData | null;
+  eventData: BlazeEventEventData | null;
 };
 
-export function decodeZephyrEvent(rawInput: unknown): ZephyrEvent | null {
+export function decodeBlazeEvent(rawInput: unknown): BlazeEvent | null {
   if (isJSON(rawInput)) {
     const decodedEventName = decodeString(rawInput['eventName']);
-    const decodedEventData = decodeZephyrEventEventData(rawInput['eventData']);
+    const decodedEventData = decodeBlazeEventEventData(rawInput['eventData']);
 
     if (decodedEventName === null) {
       return null;
@@ -411,11 +436,11 @@ export function decodeZephyrEvent(rawInput: unknown): ZephyrEvent | null {
   return null;
 }
 /**
- * @type { ZephyrEventEventData }
+ * @type { BlazeEventEventData }
  */
-export type ZephyrEventEventData = Record<string, unknown>;
+export type BlazeEventEventData = Record<string, unknown>;
 
-export function decodeZephyrEventEventData(rawInput: unknown): ZephyrEventEventData | null {
+export function decodeBlazeEventEventData(rawInput: unknown): BlazeEventEventData | null {
   if (isJSON(rawInput)) {
     return {
       ...rawInput

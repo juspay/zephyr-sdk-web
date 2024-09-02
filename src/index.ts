@@ -1,25 +1,25 @@
 import {
-  type ZephyrProcessPayload,
-  type ZephyrInitiatePayload,
-  decodeZephyrInitiatePayload,
-  decodeZephyrProcessPayload
+  type BlazeProcessPayload,
+  type BlazeInitiatePayload,
+  decodeBlazeInitiatePayload,
+  decodeBlazeProcessPayload
 } from './generated/types';
 
-export type ZephyrCallback = (payload: Record<string, unknown>) => void;
+export type BlazeCallback = (payload: Record<string, unknown>) => void;
 
-class ZephyrSDK {
-  static initiatePayload: ZephyrInitiatePayload;
-  static callback: ZephyrCallback;
-  static processPayload: ZephyrProcessPayload;
+class BlazeSDK {
+  static initiatePayload: BlazeInitiatePayload;
+  static callback: BlazeCallback;
+  static processPayload: BlazeProcessPayload;
 
   /**
-   * @description Initiate the Zephyr SDK. Ensures all assets required for running Zephyr SDK services are pre-loaded.
-   * @param payload {ZephyrInitiatePayload}
-   * @param callbackFn {ZephyrCallback} - Optional
+   * @description Initiate the Blaze SDK. Ensures all assets required for running Blaze SDK services are pre-loaded.
+   * @param payload {BlazeInitiatePayload}
+   * @param callbackFn {BlazeCallback} - Optional
    * @returns void
    */
-  static initiate(payload: ZephyrInitiatePayload, callbackFn?: ZephyrCallback): void {
-    const decodedInitiatePayload = decodeZephyrInitiatePayload(payload);
+  static initiate(payload: BlazeInitiatePayload, callbackFn?: BlazeCallback): void {
+    const decodedInitiatePayload = decodeBlazeInitiatePayload(payload);
     if (decodedInitiatePayload === null) {
       throw new Error('Invalid Initiate payload');
     }
@@ -52,17 +52,17 @@ class ZephyrSDK {
   }
 
   /**
-   * @description Request Zephyr SDK to process your request.
-   * @param payload {ZephyrProcessPayload} - The payload data required for the process request.
-   * @param callbackFn {ZephyrCallback} - Optional
+   * @description Request Blaze SDK to process your request.
+   * @param payload {BlazeProcessPayload} - The payload data required for the process request.
+   * @param callbackFn {BlazeCallback} - Optional
    */
-  static process(payload: ZephyrProcessPayload, callbackFn?: ZephyrCallback): void {
-    const decodedProcessPayload = decodeZephyrProcessPayload(payload);
+  static process(payload: BlazeProcessPayload, callbackFn?: BlazeCallback): void {
+    const decodedProcessPayload = decodeBlazeProcessPayload(payload);
     if (decodedProcessPayload === null) {
       throw new Error('Invalid Process payload');
     }
     if (typeof this.initiatePayload === 'undefined') {
-      throw new Error('Call ZephyrSDK.initiate before calling ZephyrSDK.process');
+      throw new Error('Call BlazeSDK.initiate before calling BlazeSDK.process');
     }
 
     this.processPayload = decodedProcessPayload;
@@ -72,7 +72,7 @@ class ZephyrSDK {
     this.processPayload = payload;
 
     if (typeof window.breeze?.startCheckout === 'function') {
-      window.breeze.startCheckout(payload);
+      window.breeze.startCheckout({ ...payload, shopUrl: this.initiatePayload.shopUrl });
     } else {
       console.error('Breeze SDK not loaded');
     }
@@ -80,7 +80,7 @@ class ZephyrSDK {
 }
 
 if (typeof window !== 'undefined') {
-  window.ZephyrSDK = ZephyrSDK;
+  window.BlazeSDK = BlazeSDK;
 }
 
-export default ZephyrSDK;
+export default BlazeSDK;

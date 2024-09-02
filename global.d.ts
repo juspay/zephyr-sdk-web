@@ -1,12 +1,11 @@
-import type { JSONObject } from 'type-decoder';
-import type { ZephyrSDK } from './src';
+import type { BlazeSDK } from './src';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
-    ZephyrSDK: typeof ZephyrSDK;
+    BlazeSDK: typeof BlazeSDK;
     breeze?: {
-      startCheckout: (cart: JSONObject) => void;
+      startCheckout: (cart: Record<string, unknown>) => void;
     };
   }
 }

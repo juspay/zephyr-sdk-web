@@ -1,6 +1,6 @@
 {
-  "name": "@juspay/zephyr-sdk-web",
-  "version": "0.0.2",
+  "name": "@juspay/blaze-sdk-web",
+  "version": "0.0.1",
   "type": "module",
   "description": "SDK for integrating Breeze 1CCO into your Web Application",
   "keywords": [
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juspay/zephyr-sdk-web.git"
+    "url": "git+https://github.com/juspay/blaze-sdk-web.git"
   },
   "main": "dist/index.js",
   "files": [
@@ -133,8 +133,8 @@
       "BZ-"
     ],
     "issueUrlFormat": "https://juspay.atlassian.net/browse/{{prefix}}{{id}}",
-    "commitUrlFormat": "https://github.com/juspay/zephyr-sdk-web/commits/{{hash}}",
-    "compareUrlFormat": "https://github.com/juspay/zephyr-sdk-web/branches/compare/{{currentTag}}%0D{{previousTag}}",
+    "commitUrlFormat": "https://github.com/juspay/blaze-sdk-web/commits/{{hash}}",
+    "compareUrlFormat": "https://github.com/juspay/blaze-sdk-web/branches/compare/{{currentTag}}%0D{{previousTag}}",
     "releaseCommitMessageFormat": "chore(release): {{currentTag}} {{prefix}}{{id}}"
   },
   "commitlint": {
@@ -157,7 +157,7 @@
     "breakingPattern": "(!:)",
     "issueUrl": "https://juspay.atlassian.net/browse/{id}",
     "issuePattern": "[A-Z]{2,}-\\d+",
-    "compareUrl": "https://github.com/juspay/zephyr-sdk-web/compare/{to}..{from}",
+    "compareUrl": "https://github.com/juspay/blaze-sdk-web/compare/{to}..{from}",
     "unreleased": true,
     "releaseSummary": true,
     "hideCredit": false,
