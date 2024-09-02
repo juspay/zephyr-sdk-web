@@ -1,26 +1,26 @@
-# Zephyr SDK Web
+# Blaze SDK Web
 
-Zephyr SDK Web is a Javascript library which enables you to seamlessly integrate and use [Breeze 1 Click Checkout](https://breeze.in/) in your Web app built using any kind of web technology.
+Blaze SDK Web is a Javascript library which enables you to seamlessly integrate and use [Breeze 1 Click Checkout](https://breeze.in/) in your Web app built using any kind of web technology.
 
 ## Installation
 
-Run following command in your node project to install the Zephyr SDK Web package:
+Run following command in your node project to install the Blaze SDK Web package:
 
 ```sh
-npm install @juspay/zephyr-sdk-web
+npm install @juspay/blaze-sdk-web
 ```
 
-This will install the Zephyr SDK Web package in your project.
+This will install the Blaze SDK Web package in your project.
 
 _Note: You can use pnpm, yarn or any other package manager of your choice to install the package._
 
 ## Usage
 
-To start using the Zephyr SDK Web, you need to complete following steps:
+To start using the Blaze SDK Web, you need to complete following steps:
 
-### Step 1: Initiate the Zephyr SDK Web
+### Step 1: Initiate the Blaze SDK Web
 
-To initiate the Zephyr SDK Web, you need to call the `initiate` method of the SDK. This method takes an object as an argument which contains the following properties:
+To initiate the Blaze SDK Web, you need to call the `initiate` method of the SDK. This method takes an object as an argument which contains the following properties:
 
 | Parameter      | Type   | Mandatory | Description                                                                                                |
 | -------------- | ------ | --------- | ---------------------------------------------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ To initiate the Zephyr SDK Web, you need to call the `initiate` method of the SD
 
 ```javascript
 // Import the SDK to your project
-import Zephyr from '@juspay/zephyr-sdk-web';
+import BlazeSDK from '@juspay/blaze-sdk-web';
 
 // Create the initiate payload
 
@@ -42,37 +42,37 @@ const initiatePayload = {
   shopPlatform: 'custom'
 };
 
-Zephyr.initiate(initiatePayload);
+BlazeSDK.initiate(initiatePayload);
 ```
 
-### Step 2: Process your request through Zephyr SDK
+### Step 2: Process your request through Blaze SDK
 
-To process your request through Zephyr SDK, you need to call the `process` method of the SDK. This method takes an object. Refer below sections to understand the object structure.
+To process your request through Blaze SDK, you need to call the `process` method of the SDK. This method takes an object. Refer below sections to understand the object structure.
 
 #### Process Payload
 
-| Parameter   | Type                 | Mandatory | Description                                                                                                |
-| ----------- | -------------------- | --------- | ---------------------------------------------------------------------------------------------------------- |
-| `action`    | String               | Yes       | The action to be performed by the SDK. Possible values are `startCheckout`                                 |
-| `cart`      | ZephyrCart or String | Yes       | The cart object which contains the cart details or Stringified Cart when using signature based integration |
-| `utmParams` | Object               | No        | UTP Parameters associated with the user journey                                                            |
-| `signature` | String               | No        | RSA Signed signature for Stringified ZephyrCart JSON                                                       |
+| Parameter   | Type                | Mandatory | Description                                                                                                |
+| ----------- | ------------------- | --------- | ---------------------------------------------------------------------------------------------------------- |
+| `action`    | String              | Yes       | The action to be performed by the SDK. Possible values are `startCheckout`                                 |
+| `cart`      | BlazeCart or String | Yes       | The cart object which contains the cart details or Stringified Cart when using signature based integration |
+| `utmParams` | Object              | No        | UTP Parameters associated with the user journey                                                            |
+| `signature` | String              | No        | RSA Signed signature for Stringified BlazeCart JSON                                                        |
 
-#### ZephyrCart
+#### BlazeCart
 
-| Parameter       | Type             | Mandatory | Description                             |
-| --------------- | ---------------- | --------- | --------------------------------------- |
-| `initialPrice`  | Number           | Yes       | The initial price of the cart.          |
-| `totalPrice`    | Number           | Yes       | The total price of the cart.            |
-| `totalDiscount` | Number           | Yes       | The total discount applied on the cart. |
-| `weight`        | Number           | No        | The total weight of the cart.           |
-| `itemCount`     | Number           | Yes       | The total number of items in the cart.  |
-| `currency`      | ZephyrCurrency   | Yes       | The currency of the cart.               |
-| `items`         | ZephyrCartItem[] | Yes       | The array of items in the cart.         |
+| Parameter       | Type            | Mandatory | Description                             |
+| --------------- | --------------- | --------- | --------------------------------------- |
+| `initialPrice`  | Number          | Yes       | The initial price of the cart.          |
+| `totalPrice`    | Number          | Yes       | The total price of the cart.            |
+| `totalDiscount` | Number          | Yes       | The total discount applied on the cart. |
+| `weight`        | Number          | No        | The total weight of the cart.           |
+| `itemCount`     | Number          | Yes       | The total number of items in the cart.  |
+| `currency`      | BlazeCurrency   | Yes       | The currency of the cart.               |
+| `items`         | BlazeCartItem[] | Yes       | The array of items in the cart.         |
 
-#### ZephyrCurrency
+#### BlazeCurrency
 
-Zephyr SDK Web supports the following currencies:
+Blaze SDK Web supports the following currencies:
 
 - 'INR'
 - 'USD'
@@ -84,7 +84,7 @@ Zephyr SDK Web supports the following currencies:
 - 'PKR'
 - 'BDT'
 
-#### ZephyrCartItem
+#### BlazeCartItem
 
 | Parameter      | Type   | Mandatory | Description                       |
 | -------------- | ------ | --------- | --------------------------------- |
@@ -103,7 +103,7 @@ Post you have initiated the SDK, you can call the `process` method to execute yo
 
 ```javascript
 // Import your SDK
-import Zephyr from '@juspay/zephyr-sdk-web';
+import BlazeSDK from '@juspay/blaze-sdk-web';
 
 // Creating process payload
 const processPayload = {
@@ -149,7 +149,7 @@ const processPayload = {
   }
 };
 
-Zephyr.process(processPayload);
+BlazeSDK.process(processPayload);
 ```
 
 Note: This SDK is in alpha stage. Expect new features & breaking changes in upcoming versions.

@@ -1,2 +1,2 @@
 window.navigationData =
-  'data:application/octet-stream;base64,H4sIAAAAAAAAE4uuVipJrShRslJKSU1LLM0pUdJRKkgsyVCyUkrOSSwuTi3Wh0roZZTk5ijpKGVn5qUoWRkaWdTqwPVGpRZkVBY5J+bkJCUmZyOMKKksSC3WR5VFNcfIwNLc0NSoNhYAQtv2HIkAAAA=';
+  'data:application/octet-stream;base64,H4sIAAAAAAAAE4uuVipJrShRslJKSU1LLM0pUdJRKkgsyVCyUkrOSSwuTi3Wh0roZZTk5ijpKGVn5qUoWRkaWdTqwPU65SRWpTon5uQkJSZnI0woqSxILdZHkUQ1xcjA0tzQ1Kg2FgBPvOkmhwAAAA==';

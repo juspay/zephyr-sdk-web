@@ -1,9 +1,9 @@
 info:
   version: 0.0.1
-  title: Zephyr SDK Web Types spec
+  title: Blaze SDK Web Types spec
 
 types:
-  ZephyrInitiatePayload:
+  BlazeInitiatePayload:
     type: object
     required:
       - shopUrl
@@ -28,7 +28,7 @@ types:
           - production
           - beta
 
-  ZephyrProcessPayload:
+  BlazeProcessPayload:
     type: object
     required:
       - cart
@@ -39,14 +39,14 @@ types:
           - startCheckout
       cart:
         oneOf:
-          - $ref: '#/types/ZephyrCart'
+          - $ref: '#/types/BlazeCart'
           - type: string
       utmParams:
-        $ref: '#/types/ZephyrUTMParams'
+        $ref: '#/types/BlazeUTMParams'
       signature:
         type: string
 
-  ZephyrCart:
+  BlazeCart:
     type: object
     required:
       - initialPrice
@@ -67,13 +67,13 @@ types:
       itemCount:
         type: number
       currency:
-        $ref: '#/types/ZephyrCurrency'
+        $ref: '#/types/BlazeCurrency'
       items:
         type: array
         items:
-          $ref: '#/types/ZephyrCartItem'
+          $ref: '#/types/BlazeCartItem'
 
-  ZephyrCartItem:
+  BlazeCartItem:
     type: object
     required:
       - id
@@ -104,7 +104,7 @@ types:
       finalPrice:
         type: number
 
-  ZephyrCurrency:
+  BlazeCurrency:
     type: string
     description: Currency schema
     enum:
@@ -118,7 +118,7 @@ types:
       - PKR
       - BDT
 
-  ZephyrUTMParams:
+  BlazeUTMParams:
     type: object
     properties:
       utmSource:
@@ -132,7 +132,7 @@ types:
       utmContent:
         type: string
 
-  ZephyrEvent:
+  BlazeEvent:
     type: object
     required:
       - eventName
