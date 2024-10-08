@@ -1,6 +1,6 @@
 {
   "name": "@juspay/blaze-sdk-web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "SDK for integrating Breeze 1CCO into your Web Application",
   "keywords": [
@@ -40,8 +40,7 @@
     "format:all": "npx prettier --write .",
     "format:generated": "prettier --write ./src/generated/*",
     "lint:all": "eslint . --ext .ts",
-    "generate:doc": "npx typedoc src/index.ts",
-    "generate:types": "npx type-crafter generate typescript-with-decoders ./specs/types.spec.yaml ./src/generated/types SingleFile SingleFile && pnpm run format:generated"
+    "generate:doc": "npx typedoc src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -67,8 +66,6 @@
     "publint": "^0.2.5",
     "rollup": "^4.17.2",
     "tslib": "^2.6.2",
-    "type-crafter": "^0.8.2",
-    "type-decoder": "^2.0.1",
     "typedoc": "^0.25.7",
     "typescript": "^5.2.2"
   },

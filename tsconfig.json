@@ -31,5 +31,5 @@
       "$generated/*": ["./src/generated/*"]
     }
   },
-  "exclude": ["./dist"]
+  "exclude": ["./dist", "examples"]
 }
