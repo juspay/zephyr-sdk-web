@@ -19,7 +19,7 @@ function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): voi
     const merchantId = typeof payloadData.merchantId === 'string' ? payloadData.merchantId : null;
     const shopUrl = typeof payloadData.shopUrl === 'string' ? payloadData.shopUrl : null;
     const environment =
-      typeof payload.environment === 'string' ? payload.environment : 'production';
+      typeof payloadData.environment === 'string' ? payloadData.environment : 'production';
 
     if (merchantId !== null) {
       script.setAttribute('data-merchantid', merchantId);
