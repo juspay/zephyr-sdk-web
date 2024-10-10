@@ -18,6 +18,7 @@ function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): voi
 
     const merchantId = typeof payloadData.merchantId === 'string' ? payloadData.merchantId : null;
     const shopUrl = typeof payloadData.shopUrl === 'string' ? payloadData.shopUrl : null;
+    const shopId = typeof payloadData.shopId === 'string' ? payloadData.shopId : null;
     const environment =
       typeof payloadData.environment === 'string' ? payloadData.environment : 'production';
 
@@ -28,6 +29,11 @@ function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): voi
     if (shopUrl !== null) {
       script.setAttribute('data-shopurl', shopUrl);
     }
+
+    if (shopId !== null) {
+      script.setAttribute('data-shopid', shopId);
+    }
+
     script.setAttribute('data-environment', environment);
     script.onload = () => {
       try {
