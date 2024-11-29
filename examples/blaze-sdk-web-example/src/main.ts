@@ -94,7 +94,9 @@ function createProcessPayload() {
 }
 
 function initiateSDK(): void {
-  BlazeSDK.initiate(createSDKPayload(createInitiatePayload()));
+  BlazeSDK.initiate(createSDKPayload(createInitiatePayload()), (event) => {
+    console.log("callback: ", event);
+  });
 }
 
 function processSDK(): void {
