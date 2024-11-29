@@ -1,6 +1,6 @@
 {
   "name": "@juspay/blaze-sdk-web",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "type": "module",
   "description": "SDK for integrating Breeze 1CCO into your Web Application",
   "keywords": [
@@ -37,7 +37,7 @@
     "dev:cdn": "npx bun --watch src/index.ts & rollup --config rollup.config.js --watch --environment buildType=cdn --environment mode=dev",
     "clean:output": "rm -rf dist",
     "build": "npm run clean:output && rollup --config rollup.config.js",
-    "build:cdn": "npm run clean:output && rollup --config rollup.config.js --watch --environment buildType=cdn",
+    "build:cdn": "npm run clean:output && rollup --config rollup.config.js --environment buildType=cdn",
     "setup": "sh scripts/setup.sh",
     "format:all": "npx prettier --write .",
     "format:generated": "prettier --write ./src/generated/*",

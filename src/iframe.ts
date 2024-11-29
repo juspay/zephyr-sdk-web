@@ -6,7 +6,7 @@ let processQueue: Array<Record<string, unknown>> = [];
 function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): void {
   try {
     const script: HTMLScriptElement = document.createElement('script');
-    script.src = 'https://sdk.breeze.in/electron/158.0.2/index.js';
+    script.src = 'https://sdk.breeze.in/electron/171.0.2/index.js';
     script.type = 'module';
     script.id = 'breeze-script-tag';
     script.async = true;
