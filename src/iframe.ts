@@ -6,7 +6,7 @@ let processQueue: Array<Record<string, unknown>> = [];
 function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): void {
   try {
     const script: HTMLScriptElement = document.createElement('script');
-    script.src = 'https://sdk.breeze.in/electron/171.0.2/index.js';
+    script.src = 'https://sdk.breeze.in/electron/172.0.1/index.js';
     script.type = 'module';
     script.id = 'breeze-script-tag';
     script.async = true;
@@ -58,6 +58,12 @@ function process(payload: Record<string, unknown>): void {
   }
 }
 
+function terminate(): void {
+  if (typeof window.BlazeSDK === 'object' && typeof window.BlazeSDK.terminate === 'function') {
+    window.BlazeSDK.terminate();
+  }
+}
+
 function drainQueue(callbackFn: CallbackFn): boolean {
   const isSDKLoaded =
     typeof window.BlazeSDK === 'object' &&
@@ -99,4 +105,4 @@ function isJSON(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && !Array.isArray(value) && value !== null;
 }
 
-export default { initiate, process };
+export default { initiate, process, terminate };

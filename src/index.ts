@@ -26,6 +26,15 @@ class BlazeSDK {
     this.processPayload = payload;
     BlazeIframe.process(payload);
   }
+
+  /**
+   * @description Terminate the Blaze SDK.
+   * Ensures all assets required for running Blaze SDK services are pre-loaded.
+   */
+
+  static terminate(): void {
+    BlazeIframe.terminate();
+  }
 }
 
 export default BlazeSDK;
