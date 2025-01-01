@@ -2,11 +2,16 @@ import type { CallbackFn } from './types';
 
 let initiateQueue: Array<Record<string, unknown>> = [];
 let processQueue: Array<Record<string, unknown>> = [];
+let container: HTMLDivElement | null = null;
 
-function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): void {
+function initiate(
+  payload: Record<string, unknown>,
+  callbackFn: CallbackFn,
+  containerLayout: HTMLDivElement | null = null
+): void {
   try {
     const script: HTMLScriptElement = document.createElement('script');
-    script.src = 'https://sdk.breeze.in/electron/172.0.1/index.js';
+    script.src = 'https://sdk.breeze.in/electron/186.0.0/index.js';
     script.type = 'module';
     script.id = 'breeze-script-tag';
     script.async = true;
@@ -46,6 +51,8 @@ function initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): voi
       }
     };
 
+    container = containerLayout;
+
     document.body.appendChild(script);
   } catch (e) {}
 }
@@ -72,7 +79,7 @@ function drainQueue(callbackFn: CallbackFn): boolean {
 
   if (isSDKLoaded) {
     if (initiateQueue.length > 0) {
-      window.BlazeSDK.initiate(initiateQueue.at(0), callbackFn);
+      window.BlazeSDK.initiate(initiateQueue.at(0), callbackFn, container);
       initiateQueue = [];
     }
 
