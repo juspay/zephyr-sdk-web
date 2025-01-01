@@ -10,12 +10,13 @@ class BlazeSDK {
    * @description Initiate the Blaze SDK. Ensures all assets required for running Blaze SDK services are pre-loaded.
    * @param payload {Record<string, unknown>}
    * @param callbackFn {CallbackFn} - Mandatory method required to receive events from Blaze SDK.
+   * @param containerLayout {HTMLDivElement | null} - Optional parameter to specify the container layout for Blaze SDK.
    * @returns void
    */
-  static initiate(payload: Record<string, unknown>, callbackFn: CallbackFn): void {
+  static initiate(payload: Record<string, unknown>, callbackFn: CallbackFn, containerLayout: HTMLDivElement | null = null): void {
     this.callback = callbackFn;
     this.initiatePayload = payload;
-    BlazeIframe.initiate(payload, callbackFn);
+    BlazeIframe.initiate(payload, callbackFn, containerLayout);
   }
 
   /**
