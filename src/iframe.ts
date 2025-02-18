@@ -11,7 +11,7 @@ function initiate(
 ): void {
   try {
     const script: HTMLScriptElement = document.createElement('script');
-    script.src = 'https://sdk.breeze.in/electron/186.0.0/index.js';
+    script.src = 'https://sdk.breeze.in/electron/196.0.0/index.js';
     script.type = 'module';
     script.id = 'breeze-script-tag';
     script.async = true;
@@ -40,6 +40,7 @@ function initiate(
     }
 
     script.setAttribute('data-environment', environment);
+    script.setAttribute("data-disable-overlay-events", "true");
     script.onload = () => {
       try {
         const hiddenElement = document.createElement('breeze-button');
